@@ -1,7 +1,15 @@
-import {createApp, VueElement} from 'vue'
-import App from './App.vue'
-import "bootstrap/dist/css/bootstrap.css"
+import { createApp, VueElement } from "vue";
+import App from "./App.vue";
+import "bootstrap/dist/css/bootstrap.css";
+import $bus from "./utils/Events";
+import router from "./routes";
 
-createApp(App).mount('#app')
+const app = createApp(App);
 
-import "bootstrap/dist/js/bootstrap.js"
+app.use(router);
+
+app.config.globalProperties.$bus = $bus;
+
+app.mount("#app");
+
+import "bootstrap/dist/js/bootstrap.js";

@@ -1,13 +1,26 @@
 <template>
   <div class="container">
-    <h1 class="emphasize">{{ page.pageTitle }}</h1>
-    <p>{{ page.content }}</p>
+    <h1 class="emphasize">Page title</h1>
+    <p>{{ $route.params.index }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["page"],
+  created() {
+    console.log(this.$route.params);
+  },
+  props: {
+    page: {
+      type: Object,
+      default(rawProps) {
+        return {
+          pageTitle: "",
+          content: "",
+        };
+      },
+    },
+  },
 };
 </script>
 <style scoped>
