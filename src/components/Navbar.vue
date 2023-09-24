@@ -19,7 +19,7 @@
           </navbar-link>
           <li>
             <router-link
-              to="/create"
+              to="/pages"
               class="nav-link"
               aria-current="page"
               active-class="active"
@@ -44,11 +44,23 @@ export default {
   components: {
     NavbarLink,
   },
-  inject: ["$pages"],
+  inject: ["$pages", "$bus"],
   created() {
     this.getThemeSetting();
 
     this.pages = this.$pages.getAllPages();
+
+    this.$bus.$on("page-updated", () => {
+      this.pages = [...this.$pages.getAllPages()];
+    });
+
+    this.$bus.$on("page-created", () => {
+      this.pages = [...this.$pages.getAllPages()];
+    });
+
+    this.$bus.$on("page-deleted", () => {
+      this.pages = [...this.$pages.getAllPages()];
+    });
   },
   computed: {
     publishedPages() {
